@@ -5,6 +5,10 @@ package com.db1group
  */
 class RuleContext(val contract: ContractVersion, val executor: ScriptExecutor) {
 
+    fun log(message:String) {
+        println("[${contract.customer}] $message")
+    }
+
     fun load(type: String): List<BilledData> {
         return this.executor.repository.listByType(contract, type)
     }
