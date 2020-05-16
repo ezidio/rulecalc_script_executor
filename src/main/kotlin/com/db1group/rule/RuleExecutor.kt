@@ -1,12 +1,12 @@
-package com.db1group
+package com.db1group.rule
 
+import com.db1group.contract.BilledDataRepository
+import com.db1group.contract.ContractVersion
 import org.jetbrains.kotlin.cli.common.environment.setIdeaIoUseFallback
 import java.io.StringReader
-import java.util.function.Consumer
-import java.util.function.Function
 import javax.script.ScriptEngineManager
 
-class ScriptExecutor(
+class RuleExecutor(
     val repository: BilledDataRepository,
     private val engineManager: ScriptEngineManager = ScriptEngineManager(Thread.currentThread().contextClassLoader)) {
 
@@ -25,9 +25,9 @@ class ScriptExecutor(
             // Tive que adicionar esse "pré-script" para poder deixar as funções iguais no JavaScript
             // Isso porque o kotlin coloca todas as variaveis dentro de uma objeto "bindings"
             // Pra POC ficou bom, mas creio ser necessário criar um Strategy pra fazer isso de forma melhor.
-            if (rule.type == ScriptLanguage.KOTLIN) {
+            if (rule.type == RuleLanguage.KOTLIN) {
                 engine.eval("""
-                    import com.db1group.RuleContext
+                    import com.db1group.executor.RuleContext
                     val context = bindings["context"] as RuleContext
                 """.trimIndent(), bindings)
             }

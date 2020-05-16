@@ -1,5 +1,10 @@
 package com.db1group
 
+import com.db1group.rule.RuleExecutor
+import com.db1group.rule.RuleLanguage
+import com.db1group.contract.BilledDataRepository
+import com.db1group.contract.ContractVersion
+import com.db1group.rule.Rule
 import java.math.BigDecimal
 import java.util.*
 import javax.script.ScriptEngineManager
@@ -9,7 +14,7 @@ fun main(args: Array<String>) {
     ScriptEngineManager(Thread.currentThread().contextClassLoader).engineFactories.forEach {
         println(it.mimeTypes)
     }
-    val executor = ScriptExecutor(BilledDataRepository())
+    val executor = RuleExecutor(BilledDataRepository())
 
     val contrato1 = ContractVersion(
         customer = UUID.fromString("0d048e90-07fb-4678-85b2-dab31fae281c"),
@@ -27,7 +32,7 @@ fun main(args: Array<String>) {
     )
 
     val calculoPorLinhaMVEL = Rule(
-        type = ScriptLanguage.MVEL, script = """
+        type = RuleLanguage.MVEL, script = """
         custoPorLinha = context.param("valorPorLinha");
         linhas = context.load("LINHA");
         context.persist(linhas.size() * custoPorLinha);
@@ -37,7 +42,7 @@ fun main(args: Array<String>) {
     executor.execute(contrato2, calculoPorLinhaMVEL)
 
     val calculoPorLinhaPython = Rule(
-        type = ScriptLanguage.PYTHON, script = """
+        type = RuleLanguage.PYTHON, script = """
         custoPorLinha = context.param("valorPorLinha")
         linhas = context.load("LINHA")
         context.persist(custoPorLinha * linhas.size())
@@ -47,7 +52,7 @@ fun main(args: Array<String>) {
     executor.execute(contrato2, calculoPorLinhaPython)
 
     val calculoPorLinhaJavaScript = Rule(
-        type = ScriptLanguage.JAVASCRIPT, script = """
+        type = RuleLanguage.JAVASCRIPT, script = """
         var custoPorLinha = context.param("valorPorLinha");
         var linhas = context.load("LINHA");
         context.persist(linhas.length * custoPorLinha);
@@ -59,7 +64,7 @@ fun main(args: Array<String>) {
 
     // Script kotlin ficou lento, e tive que adicionar um adendo no ScriptExecutor
     val calculoPorLinhaKotlin = Rule(
-        type = ScriptLanguage.KOTLIN, script = """
+        type = RuleLanguage.KOTLIN, script = """
         var custoPorLinha = context.param("valorPorLinha")
         var linhas = context.load("LINHA")
         context.persist(custoPorLinha * linhas.size)

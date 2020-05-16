@@ -1,4 +1,4 @@
-package com.db1group
+package com.db1group.contract
 
 import java.math.BigDecimal
 import java.util.*

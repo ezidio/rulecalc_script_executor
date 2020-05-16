@@ -1,6 +1,7 @@
-package com.db1group
+package com.db1group.rule
 
-enum class ScriptLanguage(val mediaType:String) {
+
+enum class RuleLanguage(val mediaType:String) {
     KOTLIN("text/x-kotlin"),
     JAVASCRIPT("application/javascript"),
     PYTHON("text/python"),

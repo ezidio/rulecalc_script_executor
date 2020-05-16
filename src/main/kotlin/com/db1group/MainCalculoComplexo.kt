@@ -1,10 +1,15 @@
 package com.db1group
 
+import com.db1group.rule.RuleExecutor
+import com.db1group.rule.RuleLanguage
+import com.db1group.contract.BilledDataRepository
+import com.db1group.contract.ContractVersion
+import com.db1group.rule.Rule
 import java.math.BigDecimal
 import java.util.*
 
 fun main() {
-    val executor = ScriptExecutor(BilledDataRepository())
+    val executor = RuleExecutor(BilledDataRepository())
 
     val contrato1 = ContractVersion(
         customer = UUID.fromString("0d048e90-07fb-4678-85b2-dab31fae281c"),
@@ -17,7 +22,7 @@ fun main() {
     )
 
     val calculoComplexo = Rule(
-        type = ScriptLanguage.PYTHON, script = """
+        type = RuleLanguage.PYTHON, script = """
         import itertools
         
         # Precisa estar ordenado para o groupBy funcionar corretamente

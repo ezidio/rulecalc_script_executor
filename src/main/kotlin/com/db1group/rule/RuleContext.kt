@@ -1,9 +1,12 @@
-package com.db1group
+package com.db1group.rule
+
+import com.db1group.contract.BilledData
+import com.db1group.contract.ContractVersion
 
 /**
  * Classe que disponibiliza ao script acesso a funções externas
  */
-class RuleContext(val contract: ContractVersion, val executor: ScriptExecutor) {
+class RuleContext(val contract: ContractVersion, val executor: RuleExecutor) {
 
     fun log(message:String) {
         println("[${contract.customer}] $message")
