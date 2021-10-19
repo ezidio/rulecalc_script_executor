@@ -1,0 +1,46 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees:
+  - octocat
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behavior
+      description: Describe how the bug manifests.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: Describe what the behavior would be without the bug.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Please explain the steps required to duplicate the issue, especially if you are able to provide a sample application.
+    validations:
+      required: true
+  - type: textarea
+    id: related-code
+    attributes:
+      label: Related Code
+      description: If you are able to illustrate the bug or feature request with an example, please provide a sample application via one of the following means.
+    validations:
+      required: false
+  - type: textarea
+    id: other-information
+    attributes:
+      label: Other information
+      description: List any other information that is relevant to your issue. Stack traces, related issues, suggestions on how to fix, Stack Overflow links, forum links, etc.
+    validations:
+      required: false

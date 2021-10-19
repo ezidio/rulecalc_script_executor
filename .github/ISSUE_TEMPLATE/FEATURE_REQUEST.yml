@@ -1,0 +1,39 @@
+name: Feature Request
+description: Requests a new
+title: "[Feature Request]: "
+labels: ["feature-request", "triage"]
+assignees:
+  - octocat
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem will be solved?
+      description: Describe the problem that the user has.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Describe the impact that this has on the user. articulate how solving this problem will make your user’s life better.
+    validations:
+      required: true
+  - type: textarea
+    id: how
+    attributes:
+      label: How to Solve
+      description: Describe if you have any ideas on how we may solve this.
+    validations:
+      required: true
+  - type: textarea
+    id: urgency
+    attributes:
+      label: Urgency
+      description: Describe how urgent this is and why.
+    validations:
+      required: false
